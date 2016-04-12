@@ -1,11 +1,11 @@
-# SHTextView
+# SHTextView支持属性
 * 自适应高度
 * 行数限制
 * 伸长方向
 * placeholder
-* placeholder颜色等
+* placeholderColor
 
-<img src="http://file.bmob.cn/M03/27/BE/oYYBAFcM0ayAbka_AAK9jFstGOA620.gif" />
+<img src="http://d2.freep.cn/3tb_1604121910194yi5562651.gif" />
 
 # 如何使用
 ```objc
