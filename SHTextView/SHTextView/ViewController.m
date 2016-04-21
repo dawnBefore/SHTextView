@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "SHTextView.h"
+#import "OneViewController.h"
+#import "TwoViewController.h"
 
 @interface ViewController ()
 
@@ -18,17 +19,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SHTextView *textView = [[SHTextView alloc] initWithFrame:CGRectMake(100, 100, 300, 40)];
-    textView.font = [UIFont systemFontOfSize:16];
-    textView.placeholder = @"说点啥吧...";
-    /** 是否可以伸缩 */
-    textView.isCanExtend = YES;
-    /** 伸缩行数 */
-    textView.extendLimitRow = 4;
-    /** 伸缩方向 */
-    textView.extendDirection = ExtendUp;
-    textView.layer.borderWidth = 1;
-    [self.view addSubview:textView];
+    
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"向上伸缩";
+    } else {
+        cell.textLabel.text = @"向下伸缩";
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        OneViewController *oneVC = [[OneViewController alloc] init];
+        [self.navigationController pushViewController:oneVC animated:YES];
+    } else {
+        TwoViewController *twoVC = [[TwoViewController alloc] init];
+        [self.navigationController pushViewController:twoVC animated:YES];
+    }
+    
+}
+
 
 @end

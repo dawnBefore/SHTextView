@@ -7,6 +7,7 @@
 //
 
 #import "SHTextView.h"
+#import "Masonry.h"
 
 #define TextStartX 5
 #define TextStartY 8
@@ -32,7 +33,6 @@
     
     _placeholderLocation = CGPointMake(TextStartX, TextStartY); 
     _placeholderColor = [UIColor lightGrayColor];
-    _extendDirection = ExtendDown;                      // 默认向下伸长
     _isCanExtend = YES;                                 // 默认可以伸长
     _extendLimitRow = 1000;                             // 默认没有限制
 }
@@ -72,35 +72,29 @@
     //  限制行数
     if (_extendLimitRow >= textRow) {
         
-        if (self.contentSize.height > self.frame.size.height && self.isCanExtend) {                   // 伸长
+        if (_isCanExtend == YES) {
             
             [self extendFrame];
-            
-        } else if (self.contentSize.height + 8 < self.frame.size.height && self.isCanExtend) {        // 收回
-            
-            [self extendFrame];
-        
         }
     }
 }
 
 - (void)extendFrame
 {
-    if (_extendDirection == ExtendUp) {     // 向上伸长
-        CGFloat offset = self.contentSize.height  - self.frame.size.height;
-        [UIView animateWithDuration:ExtendAnimateDuration animations:^{
-            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y - offset, self.frame.size.width, self.contentSize.height);
+    
+    [UIView animateWithDuration:ExtendAnimateDuration animations:^{
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(@(self.contentSize.height));
         }];
-        [self setContentOffset:CGPointMake(0, 0) animated:YES];
-    } else {                                // 向下伸长
-        [UIView animateWithDuration:ExtendAnimateDuration animations:^{
-            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.contentSize.height);
-        }];
-        [self setContentOffset:CGPointMake(0, 0) animated:YES];
-    }
+    }];
+    [self setContentOffset:CGPointMake(0, 0) animated:YES];
+    
+    
+    [UIView animateWithDuration:ExtendAnimateDuration animations:^{
+        [self.superview layoutIfNeeded];
+    }];
     
 }
-
 
 
 - (void)setPlaceholder:(NSString *)placeholder
@@ -118,6 +112,7 @@
     
     [self setNeedsDisplay];
 }
+
 
 - (void)dealloc
 {

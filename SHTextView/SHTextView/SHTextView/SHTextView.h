@@ -9,11 +9,6 @@
 #import <UIKit/UIKit.h>
 @class SHTextView;
 
-typedef enum
-{
-    ExtendUp,
-    ExtendDown
-}ExtendDirection;
 
 @protocol SHTextViewDelegate <UITextViewDelegate>
 
@@ -36,8 +31,6 @@ typedef enum
 /** textView是否可伸长 */
 @property (nonatomic, assign) BOOL isCanExtend;
 
-/** 伸长方向 */
-@property (nonatomic, assign) ExtendDirection extendDirection;
 
 /** 伸长限制行数 */
 @property (nonatomic, assign) NSUInteger extendLimitRow;
