@@ -5,7 +5,7 @@
 * placeholder
 * placeholderColor
 
-<img src="http://d2.freep.cn/3tb_1604121910194yi5562651.gif" />
+<img src="http://d3.freep.cn/3tb_1604211233083yk5562651.gif" />
 
 # 如何使用
 ```objc
@@ -19,7 +19,7 @@ toolbar.backgroundColor = [UIColor colorWithRed:244/255.0 green:244/255.0 blue:2
 make.left.equalTo(self.view.mas_left);
 make.right.equalTo(self.view.mas_right);
 make.bottom.equalTo(self.view.mas_bottom).offset(-400);   // 这个是向上伸缩
-make.top.equalTo(self.view.mas_top).offset(100);    // 修改一下依赖，就向下伸缩了
+// make.top.equalTo(self.view.mas_top).offset(100);    // 修改一下依赖，就向下伸缩了
 make.height.mas_equalTo(@44).priorityLow();
 }];
 
